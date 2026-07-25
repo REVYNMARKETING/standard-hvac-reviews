@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Standard HVAC Reviews | Napa Valley's Premier HVAC Contractor</title>
+  <title>Standard HVAC Reviews | Napa Valley's Leading HVAC Installation Company</title>
   <meta name="description" content="Verified client reviews for Standard HVAC — Napa Valley's leading HVAC installation company. Heat pump installation, AC replacement, custom ducting, and commercial HVAC serving Napa and Sonoma County since 2007.">
-  <meta name="keywords" content="Standard HVAC reviews, HVAC Napa Valley, HVAC installation Napa, heat pump installation Napa Valley, AC replacement Napa, heating and cooling Napa, HVAC contractor Napa, commercial HVAC Napa Valley, winery HVAC Napa, custom home HVAC Napa, estate HVAC Napa, Standard SRVC, best HVAC company Napa, Sonoma County HVAC, HVAC St Helena, HVAC Calistoga, HVAC Yountville">
+  <meta name="keywords" content="Standard HVAC reviews, HVAC Napa Valley, HVAC installation Napa, heat pump installation Napa Valley, AC replacement Napa, heating and cooling Napa, HVAC contractor Napa, commercial HVAC Napa Valley, winery HVAC Napa, custom home HVAC Napa, estate HVAC Napa, best HVAC company Napa, Sonoma County HVAC, HVAC St Helena, HVAC Calistoga, HVAC Yountville">
   <link rel="canonical" href="https://standard-hvac-reviews.vercel.app">
-  <meta property="og:title" content="Standard HVAC Reviews | Napa Valley's Premier HVAC Contractor">
-  <meta property="og:description" content="Verified client reviews for Standard HVAC — Napa Valley's premier heating, ventilation, and air conditioning installation company since 2007.">
+  <meta property="og:title" content="Standard HVAC Reviews | Napa Valley's Leading HVAC Installation Company">
+  <meta property="og:description" content="Verified client reviews for Standard HVAC — Napa Valley's leading heating, ventilation, and air conditioning installation company since 2007.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://standard-hvac-reviews.vercel.app">
+  <meta property="og:image" content="https://standard-hvac-reviews.vercel.app/img/hero.jpg">
 
   <script type="application/ld+json">
   {
@@ -67,665 +68,749 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:  #0a0a0a;
-      --dark:   #101010;
-      --card:   #141414;
-      --red:    #C8102E;
-      --white:  #f7f7f5;
-      --grey:   #9a9a9a;
-      --dim:    #5f5f5f;
-      --line:   rgba(255,255,255,0.08);
-      --max:    1200px;
+      --bg:      #0e0e0e;
+      --panel:   #151515;
+      --red:     #C8102E;
+      --white:   #ffffff;
+      --grey:    #b7b7b7;
+      --dim:     #6f6f6f;
+      --line:    rgba(255,255,255,0.10);
+      --max:     1280px;
+      --ease:    cubic-bezier(0.77, 0, 0.175, 1);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
+      background: var(--bg);
       color: var(--white);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+    body.locked { overflow: hidden; }
 
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
 
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2.5rem;
+    h1, h2, h3, .u {
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
     }
 
-    /* ───────── NAV ───────── */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
+
+    /* ═══════════ PRELOADER ═══════════ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1s var(--ease);
+    }
+    #loader.lift { transform: translateY(-100%); }
+
+    .loader-logo {
+      width: clamp(220px, 34vw, 360px);
+      position: relative;
+      overflow: hidden;
+    }
+    .loader-logo img {
+      width: 100%;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: logoIn 0.9s var(--ease) 0.15s forwards;
+    }
+    @keyframes logoIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .loader-logo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #0a0a0a;
+      transform: translateX(0);
+      animation: logoWipe 0.9s var(--ease) 0.55s forwards;
+    }
+    @keyframes logoWipe {
+      to { transform: translateX(101%); }
+    }
+
+    .loader-track {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--red);
+      transition: width 0.25s ease;
+    }
+    .loader-count {
+      position: absolute;
+      bottom: 2.2rem;
+      right: 3rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ═══════════ NAV ═══════════ */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-      transition: background 0.3s ease;
+      z-index: 90;
+      transition: background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.solid {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--line);
     }
     .nav-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 2.5rem;
-      height: 76px;
+      padding: 0 3rem;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-right { display: flex; align-items: center; gap: 2.75rem; }
+    .nav-right > a:not(.nav-tel) {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey);
+      transition: color 0.25s ease;
+      position: relative;
+      padding: 0.4rem 0;
+    }
+    .nav-right > a:not(.nav-tel)::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 1px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.35s var(--ease);
+    }
+    .nav-right > a:not(.nav-tel):hover { color: var(--white); }
+    .nav-right > a:not(.nav-tel):hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .nav-tel {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      background: var(--red);
+      color: #fff;
+      padding: 0.85rem 1.6rem;
+      transition: background 0.25s ease;
+    }
+    .nav-tel:hover { background: #a30d26; }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('./img/hero.jpg') center 30% / cover no-repeat;
+      transform: scale(1.08);
+      animation: heroZoom 8s ease-out forwards;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.35) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 3rem 7.5rem;
+    }
+
+    .chips { display: flex; gap: 0.6rem; margin-bottom: 1.8rem; }
+    .chip {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+      padding: 0.55rem 1.1rem;
+    }
+    .chip.red { background: var(--red); }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+      font-weight: 600;
+      letter-spacing: 0.015em;
+      line-height: 1.04;
+      margin-bottom: 1.6rem;
+    }
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey);
+      max-width: 720px;
+      line-height: 2;
+      margin-bottom: 3rem;
+    }
+
+    .hero-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
-    }
-    .nav-logo img {
-      height: 40px;
-      width: auto;
-      border-radius: 3px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-    }
-    .nav-links a {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--grey);
-      transition: color 0.25s ease;
-    }
-    .nav-links a:hover { color: var(--white); }
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--red);
-      color: #fff !important;
-      padding: 0.7rem 1.4rem;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      transition: background 0.25s ease, transform 0.25s ease;
-    }
-    .nav-cta:hover { background: #a90d27; transform: translateY(-1px); }
-
-    /* ───────── HERO ───────── */
-    .hero {
-      padding: 190px 0 110px;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--line);
-    }
-    /* subtle red accent glow, static + tasteful */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -300px; right: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(200,16,46,0.10) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 1.5rem;
-    }
-    .hero-kicker::before {
-      content: '';
-      width: 34px; height: 1px;
-      background: var(--red);
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      font-size: clamp(2.4rem, 4.6vw, 3.9rem);
-      line-height: 1.12;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--red);
-    }
-    .hero-lede {
-      font-size: 1.02rem;
-      color: var(--grey);
-      line-height: 1.85;
-      max-width: 540px;
-      margin-bottom: 2.5rem;
-    }
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
       flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      padding-top: 2rem;
     }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--red);
-      color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
+    .hero-rating { display: flex; align-items: center; gap: 1.4rem; }
+    .hero-rating .score {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.8rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      transition: background 0.25s ease, transform 0.25s ease;
-    }
-    .btn-primary:hover { background: #a90d27; transform: translateY(-2px); }
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 1rem 2rem;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--grey);
-      transition: border-color 0.25s ease, color 0.25s ease;
-    }
-    .btn-ghost:hover { border-color: var(--grey); color: var(--white); }
-
-    /* hero rating card */
-    .rating-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 3rem 2.75rem;
-      position: relative;
-    }
-    .rating-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--red);
-      border-radius: 8px 8px 0 0;
-    }
-    .rating-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.5rem;
-      font-weight: 500;
       line-height: 1;
-      margin-bottom: 0.75rem;
     }
-    .rating-stars {
-      display: flex;
-      gap: 0.35rem;
-      margin-bottom: 1rem;
-    }
-    .rating-stars svg { width: 20px; height: 20px; fill: var(--red); }
-    .rating-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 2rem;
-    }
-    .rating-divider {
-      height: 1px;
-      background: var(--line);
-      margin-bottom: 2rem;
-    }
-    .rating-facts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .rating-fact .n {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+    .hero-rating .stars { display: flex; gap: 0.25rem; margin-bottom: 0.35rem; }
+    .hero-rating .stars svg { width: 15px; height: 15px; fill: var(--red); }
+    .hero-rating .cap {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.64rem;
       font-weight: 500;
-    }
-    .rating-fact .l {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--dim);
-      margin-top: 0.15rem;
+      color: var(--grey);
     }
-
-    /* ───────── TRUST BAR ───────── */
-    .trustbar {
-      border-bottom: 1px solid var(--line);
-      background: var(--dark);
-    }
-    .trustbar-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1.4rem 2.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3.5rem;
-      flex-wrap: wrap;
-    }
-    .trust-item {
+    .hero-cta {
+      font-family: 'Poppins', sans-serif;
       font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--dim);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .trust-item::before {
-      content: '';
-      width: 5px; height: 5px;
-      background: var(--red);
-      border-radius: 50%;
-    }
-
-    /* ───────── SECTION HEADS ───────── */
-    section { padding: 100px 0; }
-
-    .sec-head {
-      max-width: 640px;
-      margin-bottom: 4rem;
-    }
-    .sec-head.center {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .sec-kicker {
+      color: #fff;
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+      gap: 1rem;
+    }
+    .hero-cta .arrow {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .hero-cta .arrow svg { width: 16px; height: 16px; fill: #fff; transform: rotate(90deg); }
+    .hero-cta:hover .arrow { background: var(--red); border-color: var(--red); }
+
+    /* masked line reveal for hero */
+    .mask { overflow: hidden; display: block; }
+    .mask > span {
+      display: block;
+      transform: translateY(110%);
+      transition: transform 1s var(--ease);
+    }
+    body.ready .mask > span { transform: translateY(0); }
+    .d1 > span { transition-delay: 0.10s; }
+    .d2 > span { transition-delay: 0.22s; }
+    .d3 > span { transition-delay: 0.34s; }
+    .fade-el {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    body.ready .hero .fade-el { opacity: 1; transform: translateY(0); }
+    .hero .fade-el.f1 { transition-delay: 0.05s; }
+    .hero .fade-el.f2 { transition-delay: 0.5s; }
+    .hero .fade-el.f3 { transition-delay: 0.65s; }
+
+    /* ═══════════ SECTION SCAFFOLD ═══════════ */
+    section { padding: 110px 0; position: relative; }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+    .label .bar { width: 40px; height: 2px; background: var(--red); }
+    .label span {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 1.25rem;
     }
-    .sec-head.center .sec-kicker::before,
-    .sec-head.center .sec-kicker::after {
-      content: '';
-      width: 28px; height: 1px;
-      background: var(--red);
+    .h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.9rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.15;
     }
-    .sec-head:not(.center) .sec-kicker::before {
-      content: '';
-      width: 28px; height: 1px;
-      background: var(--red);
-    }
-    .sec-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      font-size: clamp(1.9rem, 3.4vw, 2.8rem);
-      line-height: 1.18;
-      margin-bottom: 1.25rem;
-    }
-    .sec-title em { font-style: italic; color: var(--red); }
-    .sec-sub {
+    .lead {
       font-size: 0.95rem;
       color: var(--grey);
-      line-height: 1.85;
+      line-height: 2;
     }
 
-    /* ───────── REVIEWS ───────── */
+    /* scroll reveal */
+    .rv {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .rv.in { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════ REVIEWS ═══════════ */
+    .reviews-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
     .reviews-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
     }
-    .review-card {
-      background: var(--card);
+    .rcard {
+      background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 2.75rem 2.5rem;
+      padding: 3rem 2.75rem;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      transition: border-color 0.35s ease, transform 0.35s ease;
     }
-    .review-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(200,16,46,0.35);
+    .rcard:hover { border-color: rgba(200,16,46,0.5); transform: translateY(-5px); }
+    .rcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 56px; height: 3px;
+      background: var(--red);
     }
-    .review-card .stars {
-      display: flex;
-      gap: 0.3rem;
-      margin-bottom: 1.5rem;
-    }
-    .review-card .stars svg { width: 16px; height: 16px; fill: var(--red); }
-    .review-card blockquote {
-      font-size: 0.98rem;
-      color: #d6d6d4;
-      line-height: 1.9;
+    .rcard .stars { display: flex; gap: 0.3rem; margin-bottom: 1.75rem; }
+    .rcard .stars svg { width: 15px; height: 15px; fill: var(--red); }
+    .rcard blockquote {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #d9d9d9;
+      line-height: 2.05;
       flex: 1;
-      margin-bottom: 2rem;
+      margin-bottom: 2.25rem;
     }
-    .review-foot {
+    .rfoot {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding-top: 1.75rem;
+      gap: 1.1rem;
       border-top: 1px solid var(--line);
+      padding-top: 1.75rem;
     }
-    .review-avatar {
+    .rmark {
       width: 46px; height: 46px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--red), #7d0a1d);
+      background: var(--red);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
       color: #fff;
       flex-shrink: 0;
     }
-    .review-name {
-      font-size: 0.9rem;
+    .rname {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
       font-weight: 600;
-      color: var(--white);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
-    .review-meta {
-      font-size: 0.76rem;
+    .rmeta {
+      font-size: 0.75rem;
       color: var(--dim);
-      margin-top: 0.15rem;
+      letter-spacing: 0.04em;
+      margin-top: 0.2rem;
     }
-    .verified {
+    .rverified {
       margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
     }
-    .verified svg { width: 14px; height: 14px; fill: var(--red); }
+    .rverified .dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
 
-    /* ───────── ABOUT / SEO ───────── */
-    .about { background: var(--dark); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    /* ═══════════ ABOUT ═══════════ */
+    .about {
+      background: #0a0a0a;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
+      gap: 5.5rem;
+      align-items: center;
     }
-    .about-copy p {
-      font-size: 0.94rem;
-      color: var(--grey);
-      line-height: 1.95;
-      margin-bottom: 1.4rem;
-    }
-    .about-copy strong { color: var(--white); font-weight: 500; }
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .stat-box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 2.25rem 2rem;
-    }
-    .stat-box .n {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      font-weight: 500;
-      line-height: 1;
-      color: var(--red);
-    }
-    .stat-box .l {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-top: 0.65rem;
-    }
-
-    /* ───────── SERVICES ───────── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .service-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 2.25rem 2rem;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(200,16,46,0.35);
-    }
-    .service-num {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      color: var(--red);
-      margin-bottom: 1rem;
-    }
-    .service-card h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    .service-card p {
-      font-size: 0.85rem;
-      color: var(--grey);
-      line-height: 1.8;
-    }
-
-    /* ───────── CTA ───────── */
-    .cta {
-      background: var(--dark);
-      border-top: 1px solid var(--line);
-      text-align: center;
+    .about-img {
       position: relative;
       overflow: hidden;
     }
-    .cta::before {
-      content: '';
+    .about-img img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease);
+    }
+    .about-img:hover img { transform: scale(1.04); }
+    .about-img .badge {
       position: absolute;
-      bottom: -350px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse, rgba(200,16,46,0.09) 0%, transparent 65%);
-      pointer-events: none;
+      left: 0; bottom: 0;
+      background: var(--red);
+      padding: 1.6rem 2.2rem;
     }
-    .cta .sec-title { margin-bottom: 0.75rem; }
-    .cta .sec-sub { margin-bottom: 3rem; }
-    .cta-phone {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 2.5rem;
-      transition: color 0.3s ease;
-      position: relative;
+    .about-img .badge .n {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1;
     }
-    .cta-phone:hover { color: var(--red); }
-    .cta-actions {
-      display: flex;
-      justify-content: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      position: relative;
+    .about-img .badge .l {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .about-copy .h2 { margin-bottom: 1.75rem; }
+    .about-copy p {
+      font-size: 0.93rem;
+      color: var(--grey);
+      line-height: 2.05;
+      margin-bottom: 1.3rem;
+    }
+    .about-copy strong { color: var(--white); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      margin-top: 2.4rem;
+    }
+    .astat {
+      padding: 1.6rem 1.2rem;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+    .astat:last-child { border-right: none; }
+    .astat .n {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+    }
+    .astat .l {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-top: 0.5rem;
     }
 
-    /* ───────── FOOTER ───────── */
+    /* ═══════════ SERVICES ═══════════ */
+    .svc-head { text-align: center; max-width: 620px; margin: 0 auto 4rem; }
+    .svc-head .label { justify-content: center; }
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .svc {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 2.6rem 2.3rem;
+      transition: border-color 0.35s ease, transform 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .svc:hover { border-color: rgba(200,16,46,0.5); transform: translateY(-5px); }
+    .svc .num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      margin-bottom: 1.3rem;
+    }
+    .svc h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .svc p {
+      font-size: 0.84rem;
+      color: var(--grey);
+      line-height: 1.95;
+    }
+
+    /* ═══════════ CTA ═══════════ */
+    .cta {
+      position: relative;
+      overflow: hidden;
+      padding: 150px 0;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: url('./img/cta.jpg') center / cover no-repeat fixed;
+    }
+    .cta-shade {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.88);
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    .cta-inner .label { justify-content: center; }
+    .cta-inner .h2 { margin-bottom: 1.2rem; }
+    .cta-inner .lead { margin-bottom: 3rem; }
+    .cta-tel {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 2.75rem;
+      transition: color 0.3s ease;
+    }
+    .cta-tel:hover { color: var(--red); }
+    .cta-btns { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .btn-solid {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: #fff;
+      padding: 1.1rem 2.4rem;
+      transition: background 0.25s ease;
+    }
+    .btn-solid:hover { background: #a30d26; }
+    .btn-line {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      padding: 1.1rem 2.4rem;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .btn-line:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
+
+    /* ═══════════ FOOTER ═══════════ */
     footer {
       border-top: 1px solid var(--line);
-      padding: 3rem 0;
+      padding: 3.4rem 0;
+      background: #0a0a0a;
     }
-    .footer-inner {
+    .foot {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 2.5rem;
+      padding: 0 3rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 2rem;
+      justify-content: space-between;
+      gap: 2.5rem;
       flex-wrap: wrap;
     }
-    .footer-inner img { height: 30px; border-radius: 2px; opacity: 0.85; }
-    .footer-inner p {
+    .foot img { height: 26px; }
+    .foot p {
       font-size: 0.74rem;
       color: var(--dim);
-      line-height: 1.9;
+      line-height: 2;
+      letter-spacing: 0.03em;
     }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .footer-links a {
-      font-size: 0.74rem;
+    .foot-links { display: flex; gap: 2.2rem; }
+    .foot-links a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--dim);
       transition: color 0.25s ease;
     }
-    .footer-links a:hover { color: var(--white); }
+    .foot-links a:hover { color: var(--white); }
 
-    /* ───────── SCROLL REVEAL ───────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
-    }
-    .fade-up.in { opacity: 1; transform: translateY(0); }
-
-    /* ───────── RESPONSIVE ───────── */
-    @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 1000px) {
+      .wrap, .nav-inner, .hero-content, .foot, .cta-inner { padding-left: 2rem; padding-right: 2rem; }
       .reviews-grid { grid-template-columns: 1fr; }
-      .nav-links a:not(.nav-cta) { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img img { height: 420px; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .nav-right > a:not(.nav-tel) { display: none; }
+      .cta-bg { background-attachment: scroll; }
     }
-    @media (max-width: 600px) {
-      .wrap { padding: 0 1.5rem; }
-      .nav-inner { padding: 0 1.5rem; }
-      section { padding: 70px 0; }
-      .hero { padding: 150px 0 80px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
-      .trustbar-inner { gap: 1.5rem; }
+    @media (max-width: 620px) {
+      .wrap, .nav-inner, .hero-content, .foot, .cta-inner { padding-left: 1.4rem; padding-right: 1.4rem; }
+      section { padding: 80px 0; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .hero-content { padding-bottom: 5rem; }
+      .hero-foot { flex-direction: column; align-items: flex-start; }
+      .rcard { padding: 2.2rem 1.8rem; }
+      .rverified { display: none; }
+      .foot { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .loader-count { right: 1.4rem; bottom: 1.6rem; }
     }
   </style>
 </head>
-<body>
+<body class="locked">
 
-  <!-- NAV -->
-  <nav class="nav">
+  <!-- ═══ PRELOADER ═══ -->
+  <div id="loader">
+    <div class="loader-logo"><img src="./img/logo.png" alt="Standard HVAC"></div>
+    <div class="loader-count" id="count">0</div>
+    <div class="loader-track"><div class="loader-bar" id="bar"></div></div>
+  </div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo" aria-label="Standard HVAC">
-        <img src="./logo.jpg" alt="Standard HVAC">
-      </a>
-      <div class="nav-links">
+      <a href="#" class="nav-logo"><img src="./img/logo.png" alt="Standard HVAC — Napa Valley"></a>
+      <div class="nav-right">
         <a href="#reviews">Reviews</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="tel:+17072551748" class="nav-cta">(707) 255-1748</a>
+        <a href="tel:+17072551748" class="nav-tel">(707) 255-1748</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ═══ HERO ═══ -->
   <header class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="fade-up in">
-          <div class="hero-kicker">Verified Client Reviews</div>
-          <h1>Napa Valley's Most <em>Trusted</em> HVAC Contractor</h1>
-          <p class="hero-lede">
-            For 19 years, Standard HVAC has delivered commercial-grade heating and cooling installations across Napa and Sonoma County — custom homes, wineries, estates, and new construction. Here's what our clients say.
-          </p>
-          <div class="hero-actions">
-            <a href="#reviews" class="btn-primary">Read the Reviews</a>
-            <a href="https://www.standardhvacnapa.com" target="_blank" rel="noopener" class="btn-ghost">Visit Main Site</a>
+    <div class="hero-bg"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-content">
+      <div class="chips fade-el f1">
+        <span class="chip red">Reviews</span>
+        <span class="chip">Verified Clients</span>
+      </div>
+      <h1>
+        <span class="mask d1"><span>What Napa Valley</span></span>
+        <span class="mask d2"><span>Says About Us</span></span>
+      </h1>
+      <p class="hero-sub fade-el f2">
+        Verified client reviews for Napa Valley's leading HVAC installation company — custom homes, new construction, and commercial projects since 2007.
+      </p>
+      <div class="hero-foot fade-el f3">
+        <div class="hero-rating">
+          <div class="score">5.0</div>
+          <div>
+            <div class="stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            </div>
+            <div class="cap">Average Client Rating</div>
           </div>
         </div>
-        <div class="rating-card fade-up in">
-          <div class="rating-num">5.0</div>
-          <div class="rating-stars" aria-label="5 out of 5 stars">
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
-          </div>
-          <div class="rating-label">Average Client Rating</div>
-          <div class="rating-divider"></div>
-          <div class="rating-facts">
-            <div class="rating-fact">
-              <div class="n">3,000+</div>
-              <div class="l">Projects</div>
-            </div>
-            <div class="rating-fact">
-              <div class="n">2,000+</div>
-              <div class="l">Clients</div>
-            </div>
-            <div class="rating-fact">
-              <div class="n">19</div>
-              <div class="l">Years in Napa</div>
-            </div>
-            <div class="rating-fact">
-              <div class="n">Est. 2007</div>
-              <div class="l">Founded</div>
-            </div>
-          </div>
-        </div>
+        <a href="#reviews" class="hero-cta">
+          Read the Reviews
+          <span class="arrow"><svg viewBox="0 0 24 24"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg></span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- TRUST BAR -->
-  <div class="trustbar">
-    <div class="trustbar-inner">
-      <div class="trust-item">Licensed, Bonded &amp; Insured</div>
-      <div class="trust-item">EPA Certified</div>
-      <div class="trust-item">VRF Certified — All Major Brands</div>
-      <div class="trust-item">Serving Napa Valley Since 2007</div>
-    </div>
-  </div>
-
-  <!-- REVIEWS -->
+  <!-- ═══ REVIEWS ═══ -->
   <section id="reviews">
     <div class="wrap">
-      <div class="sec-head center fade-up">
-        <div class="sec-kicker">Client Reviews</div>
-        <h2 class="sec-title">In Their Own <em>Words</em></h2>
-        <p class="sec-sub">Real reviews from Standard HVAC clients across Napa Valley — from full system replacements in St. Helena to service calls in Napa.</p>
+      <div class="reviews-head">
+        <div class="rv">
+          <div class="label"><div class="bar"></div><span>Client Reviews</span></div>
+          <h2 class="h2">In Their Own Words</h2>
+        </div>
+        <p class="lead rv" style="max-width: 420px;">
+          Real reviews from Standard HVAC clients across Napa Valley — from full system replacements in St. Helena to service calls in Napa.
+        </p>
       </div>
 
       <div class="reviews-grid">
-
-        <article class="review-card fade-up">
-          <div class="stars" aria-label="5 out of 5 stars">
+        <article class="rcard rv">
+          <div class="stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
@@ -735,21 +820,18 @@
           <blockquote>
             "I am very impressed and pleased with the work done today by your team of very competent and professional people who installed an entirely new heating and cooling system to replace a failing 50-year-old gas furnace and AC system that was beyond repair. Mark, Carlos, Jose Luis and Enrique came early, fully prepared to demo the old equipment and carefully install the new heat pump system. Thank you very much for your attention to detail and sending the best guys to get the job done."
           </blockquote>
-          <div class="review-foot">
-            <div class="review-avatar">TF</div>
+          <div class="rfoot">
+            <div class="rmark">TF</div>
             <div>
-              <div class="review-name">Tom Faherty</div>
-              <div class="review-meta">St. Helena, CA · Heat Pump System Replacement</div>
+              <div class="rname">Tom Faherty</div>
+              <div class="rmeta">St. Helena, CA — Heat Pump System Replacement</div>
             </div>
-            <div class="verified">
-              <svg viewBox="0 0 24 24"><path d="M12 1l3.2 2.1 3.8.3 1.4 3.6 2.9 2.5-1 3.7 1 3.7-2.9 2.5-1.4 3.6-3.8.3L12 25l-3.2-2.1-3.8-.3-1.4-3.6L.7 16.5l1-3.7-1-3.7 2.9-2.5 1.4-3.6 3.8-.3z" transform="scale(0.92)"/><path fill="#0a0a0a" d="M10.4 15.6l-2.8-2.8 1.2-1.2 1.6 1.6 4.8-4.8 1.2 1.2z"/></svg>
-              Verified
-            </div>
+            <div class="rverified"><span class="dot"></span>Verified</div>
           </div>
         </article>
 
-        <article class="review-card fade-up">
-          <div class="stars" aria-label="5 out of 5 stars">
+        <article class="rcard rv">
+          <div class="stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
@@ -759,102 +841,87 @@
           <blockquote>
             "They have the system up and running! They said they will start the hunt for a replacement coil. One thing I wanted you to know is that your employees do your company honor. They are both the nicest guys and are welcome in our house anytime. Thank you."
           </blockquote>
-          <div class="review-foot">
-            <div class="review-avatar">CC</div>
+          <div class="rfoot">
+            <div class="rmark">CC</div>
             <div>
-              <div class="review-name">Chris Caughman</div>
-              <div class="review-meta">Napa, CA · HVAC Service &amp; Repair</div>
+              <div class="rname">Chris Caughman</div>
+              <div class="rmeta">Napa, CA — HVAC Service &amp; Repair</div>
             </div>
-            <div class="verified">
-              <svg viewBox="0 0 24 24"><path d="M12 1l3.2 2.1 3.8.3 1.4 3.6 2.9 2.5-1 3.7 1 3.7-2.9 2.5-1.4 3.6-3.8.3L12 25l-3.2-2.1-3.8-.3-1.4-3.6L.7 16.5l1-3.7-1-3.7 2.9-2.5 1.4-3.6 3.8-.3z" transform="scale(0.92)"/><path fill="#0a0a0a" d="M10.4 15.6l-2.8-2.8 1.2-1.2 1.6 1.6 4.8-4.8 1.2 1.2z"/></svg>
-              Verified
-            </div>
+            <div class="rverified"><span class="dot"></span>Verified</div>
           </div>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ABOUT / SEO COPY -->
+  <!-- ═══ ABOUT ═══ -->
   <section class="about" id="about">
     <div class="wrap">
       <div class="about-grid">
-        <div>
-          <div class="sec-head fade-up" style="margin-bottom:2.5rem;">
-            <div class="sec-kicker">About Standard HVAC</div>
-            <h2 class="sec-title">Setting the Standard in <em>Napa Valley</em> HVAC</h2>
-          </div>
-          <div class="about-copy fade-up">
-            <p>
-              Since 2007, <strong>Standard HVAC</strong> has been Napa Valley's most trusted name for precision heating and cooling installation. Whether it's a <strong>heat pump installation in St. Helena</strong>, a complete <strong>AC and furnace replacement in Napa</strong>, <strong>commercial HVAC for a Rutherford winery</strong>, or <strong>estate HVAC for a custom home in Calistoga</strong> — every project gets commercial-grade craftsmanship.
-            </p>
-            <p>
-              Homeowners, estate managers, and commercial property owners throughout <strong>Napa and Sonoma County</strong> choose Standard HVAC for clean workmanship, custom ducting built to fit specific spaces, and precision piping and wiring that reflects nearly two decades of specialized expertise.
-            </p>
-            <p>
-              Standard HVAC is part of the Standard family of companies — alongside <strong>Standard Service</strong> (HVAC maintenance and repair) and <strong>Standard Fab</strong> (custom sheet metal and welding) — covering every phase of heating, ventilation, and air conditioning for residential, estate, commercial, and industrial properties across the Napa Valley region.
-            </p>
-          </div>
-        </div>
-        <div class="stat-grid fade-up">
-          <div class="stat-box">
-            <div class="n">3K+</div>
-            <div class="l">Successful Projects</div>
-          </div>
-          <div class="stat-box">
-            <div class="n">2K+</div>
-            <div class="l">Happy Clients</div>
-          </div>
-          <div class="stat-box">
+        <div class="about-img rv">
+          <img src="./img/about.jpg" alt="Standard HVAC commercial installation project in Napa Valley">
+          <div class="badge">
             <div class="n">19</div>
             <div class="l">Years in the Valley</div>
           </div>
-          <div class="stat-box">
-            <div class="n">1.2M</div>
-            <div class="l">Problems Solved</div>
+        </div>
+        <div class="about-copy rv">
+          <div class="label"><div class="bar"></div><span>About Standard HVAC</span></div>
+          <h2 class="h2">Setting the Standard in Napa Valley HVAC</h2>
+          <p>
+            Since 2007, <strong>Standard HVAC</strong> has been Napa Valley's most trusted name for precision heating and cooling installation — <strong>heat pump installation in St. Helena</strong>, complete <strong>AC and furnace replacement in Napa</strong>, <strong>commercial HVAC for wineries and tasting rooms</strong>, and <strong>estate HVAC for custom homes</strong> from Calistoga to Carneros.
+          </p>
+          <p>
+            Homeowners, estate managers, and commercial property owners throughout <strong>Napa and Sonoma County</strong> choose Standard HVAC for clean workmanship, custom ducting built to fit specific spaces, and precision piping and wiring that reflects nearly two decades of specialized expertise.
+          </p>
+          <p>
+            Standard HVAC is part of the Standard family of companies — alongside <strong>Standard Service</strong> (maintenance and repair) and <strong>Standard Fab</strong> (custom sheet metal and welding) — covering every phase of HVAC for residential, estate, commercial, and industrial properties.
+          </p>
+          <div class="about-stats">
+            <div class="astat"><div class="n">3K+</div><div class="l">Projects</div></div>
+            <div class="astat"><div class="n">2K+</div><div class="l">Clients</div></div>
+            <div class="astat"><div class="n">1.2M</div><div class="l">Problems Solved</div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- ═══ SERVICES ═══ -->
   <section id="services">
     <div class="wrap">
-      <div class="sec-head center fade-up">
-        <div class="sec-kicker">What We Do</div>
-        <h2 class="sec-title">Services Built on <em>Precision</em></h2>
-        <p class="sec-sub">Commercial-grade HVAC installation for custom homes, new construction, and commercial projects across Napa Valley.</p>
+      <div class="svc-head rv">
+        <div class="label"><div class="bar"></div><span>What We Do</span></div>
+        <h2 class="h2">Built on Precision</h2>
       </div>
-      <div class="services-grid">
-        <div class="service-card fade-up">
-          <div class="service-num">01</div>
+      <div class="svc-grid">
+        <div class="svc rv">
+          <div class="num">01</div>
           <h3>Heat Pump Installation</h3>
           <p>State-of-the-art inverter heat pump systems — efficient, quiet, and built for Napa Valley's climate.</p>
         </div>
-        <div class="service-card fade-up">
-          <div class="service-num">02</div>
+        <div class="svc rv">
+          <div class="num">02</div>
           <h3>Air Conditioning</h3>
           <p>Cutting-edge AC installation and replacement with digital gauges, pressure testing, and factory-grade tooling.</p>
         </div>
-        <div class="service-card fade-up">
-          <div class="service-num">03</div>
+        <div class="svc rv">
+          <div class="num">03</div>
           <h3>Heating Solutions</h3>
           <p>Gas furnaces up to 98% efficiency and powerful inverter heat pumps — the future of home heating.</p>
         </div>
-        <div class="service-card fade-up">
-          <div class="service-num">04</div>
+        <div class="svc rv">
+          <div class="num">04</div>
           <h3>Custom Ducting</h3>
           <p>Handcrafted ducting built to fit specific spaces — plenums, insulated ducting, custom supply and return cans.</p>
         </div>
-        <div class="service-card fade-up">
-          <div class="service-num">05</div>
+        <div class="svc rv">
+          <div class="num">05</div>
           <h3>Commercial HVAC</h3>
           <p>Wineries, tasting rooms, hotels, restaurants, and industrial facilities across the Napa Valley.</p>
         </div>
-        <div class="service-card fade-up">
-          <div class="service-num">06</div>
+        <div class="svc rv">
+          <div class="num">06</div>
           <h3>Sheet Metal Fabrication</h3>
           <p>Anything that can be drawn, we can build — flashings, chimney caps, and custom metallic components.</p>
         </div>
@@ -862,29 +929,30 @@
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ═══ CTA ═══ -->
   <section class="cta" id="contact">
-    <div class="wrap">
-      <div class="sec-head center fade-up" style="margin-bottom:2rem;">
-        <div class="sec-kicker">Get In Touch</div>
-        <h2 class="sec-title">Ready to Set the <em>Standard?</em></h2>
-        <p class="sec-sub">Serving Napa &amp; Sonoma County · Response within 24 hours, 7 days a week</p>
-      </div>
-      <a href="tel:+17072551748" class="cta-phone fade-up">(707) 255-1748</a>
-      <div class="cta-actions fade-up">
-        <a href="https://www.standardhvacnapa.com" target="_blank" rel="noopener" class="btn-primary">standardhvacnapa.com</a>
-        <a href="https://www.standardsrvc.com" target="_blank" rel="noopener" class="btn-ghost">Service &amp; Repairs — standardsrvc.com</a>
+    <div class="cta-bg"></div>
+    <div class="cta-shade"></div>
+    <div class="cta-inner rv">
+      <div class="label"><div class="bar"></div><span>Get in Touch</span></div>
+      <h2 class="h2">Ready to Set the Standard?</h2>
+      <p class="lead">Serving Napa &amp; Sonoma County — response within 24 hours, 7 days a week.</p>
+      <br>
+      <a href="tel:+17072551748" class="cta-tel">(707) 255-1748</a>
+      <div class="cta-btns">
+        <a href="https://www.standardhvacnapa.com" target="_blank" rel="noopener" class="btn-solid">Visit Main Site</a>
+        <a href="https://www.standardsrvc.com" target="_blank" rel="noopener" class="btn-line">Service &amp; Repairs</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ═══ FOOTER ═══ -->
   <footer>
-    <div class="footer-inner">
-      <img src="./logo.jpg" alt="Standard HVAC">
-      <p>Standard HVAC · 463 Technology Way, Napa, CA 94558 · (707) 255-1748<br>
+    <div class="foot">
+      <img src="./img/logo.png" alt="Standard HVAC">
+      <p>Standard HVAC — 463 Technology Way, Napa, CA 94558 — (707) 255-1748<br>
       HVAC Installation · Heat Pumps · Custom Ducting · Commercial &amp; Residential · Napa &amp; Sonoma County Since 2007</p>
-      <div class="footer-links">
+      <div class="foot-links">
         <a href="https://www.standardhvacnapa.com" target="_blank" rel="noopener">Standard HVAC</a>
         <a href="https://www.standardsrvc.com" target="_blank" rel="noopener">Standard Service</a>
         <a href="https://www.standardfabnapa.com" target="_blank" rel="noopener">Standard Fab</a>
@@ -893,15 +961,48 @@
   </footer>
 
   <script>
+    /* ── PRELOADER: counter + progress + lift ── */
+    (function () {
+      const loader = document.getElementById('loader');
+      const bar = document.getElementById('bar');
+      const count = document.getElementById('count');
+      let p = 0;
+
+      const tick = () => {
+        p += Math.random() * 16 + 6;
+        if (p >= 100) p = 100;
+        bar.style.width = p + '%';
+        count.textContent = Math.floor(p);
+        if (p < 100) {
+          setTimeout(tick, 140 + Math.random() * 160);
+        } else {
+          setTimeout(() => {
+            loader.classList.add('lift');
+            document.body.classList.remove('locked');
+            document.body.classList.add('ready');
+            setTimeout(() => loader.remove(), 1100);
+          }, 350);
+        }
+      };
+      setTimeout(tick, 400);
+    })();
+
+    /* ── NAV solid on scroll ── */
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('solid', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Scroll reveal ── */
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
+      entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('in');
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-up:not(.in)').forEach(el => io.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
   </script>
 
 </body>
