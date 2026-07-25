@@ -45,7 +45,7 @@
     "serviceType": ["HVAC Installation","Heat Pump Installation","Air Conditioning Installation","AC Replacement","Heating System Installation","Custom Ducting","Sheet Metal Fabrication","Commercial HVAC","Residential HVAC","Winery HVAC","Tasting Room HVAC","Estate HVAC","New Construction HVAC","Custom Home HVAC"],
     "foundingDate": "2007",
     "founder": { "@type": "Person", "name": "Jeremy Jack" },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "2", "bestRating": "5", "worstRating": "1" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "4", "bestRating": "5", "worstRating": "1" },
     "review": [
       {
         "@type": "Review",
@@ -60,6 +60,20 @@
         "reviewBody": "They have the system up and running! They said they will start the hunt for a replacement coil. One thing I wanted you to know is that your employees do your company honor. They are both the nicest guys and are welcome in our house anytime. Thank you.",
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
         "datePublished": "2026-07-24"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Bill Boeddiker" },
+        "reviewBody": "Jeremy and his team were terrific. Highly recommend.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-07-01"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Gene Kelly" },
+        "reviewBody": "Fast response. Quality work. I have had Standard HVAC do repairs on my rental properties and complete replacement of an old and difficult system, that performs well for a reasonable price. I recommend them.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2026-07-22"
       }
     ]
   }
@@ -157,18 +171,6 @@
       width: 0%;
       background: var(--red);
       transition: width 0.25s ease;
-    }
-    .loader-count {
-      position: absolute;
-      bottom: 2.2rem;
-      right: 3rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      line-height: 1;
-      color: rgba(255,255,255,0.28);
-      letter-spacing: 0.02em;
-      font-variant-numeric: tabular-nums;
     }
 
     /* ═══════════ NAV ═══════════ */
@@ -382,7 +384,6 @@
       gap: 1rem;
       margin-bottom: 1.6rem;
     }
-    .label .bar { width: 40px; height: 2px; background: var(--red); }
     .label span {
       font-family: 'Poppins', sans-serif;
       font-size: 0.68rem;
@@ -435,13 +436,17 @@
       transition: border-color 0.35s ease, transform 0.35s ease;
     }
     .rcard:hover { border-color: rgba(200,16,46,0.5); transform: translateY(-5px); }
-    .rcard::before {
+    .rcard::after {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 56px; height: 3px;
-      background: var(--red);
+      top: 0; left: -80%;
+      width: 50%; height: 100%;
+      background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.035) 50%, transparent 100%);
+      transform: skewX(-18deg);
+      transition: left 0.9s var(--ease);
+      pointer-events: none;
     }
+    .rcard:hover::after { left: 140%; }
     .rcard .stars { display: flex; gap: 0.3rem; margin-bottom: 1.75rem; }
     .rcard .stars svg { width: 15px; height: 15px; fill: var(--red); }
     .rcard blockquote {
@@ -500,6 +505,41 @@
     }
     .rverified .dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
 
+    /* ═══════════ MARQUEE ═══════════ */
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 2.2rem 0;
+      background: #0a0a0a;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 32s linear infinite;
+      will-change: transform;
+    }
+    .marquee span {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.18);
+      padding-right: 3.5rem;
+    }
+    .marquee span b {
+      color: var(--red);
+      -webkit-text-stroke: 0;
+      font-weight: 700;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
     /* ═══════════ ABOUT ═══════════ */
     .about {
       background: #0a0a0a;
@@ -522,13 +562,6 @@
       justify-content: center;
       gap: 2.4rem;
       height: 100%;
-    }
-    .about-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 56px; height: 3px;
-      background: var(--red);
     }
     .apstat { display: flex; align-items: baseline; gap: 1.75rem; border-bottom: 1px solid var(--line); padding-bottom: 2.4rem; }
     .apstat:last-child { border-bottom: none; padding-bottom: 0; }
@@ -751,7 +784,6 @@
   <!-- ═══ PRELOADER ═══ -->
   <div id="loader">
     <div class="loader-logo"><img src="./img/logo.png" alt="Standard HVAC"></div>
-    <div class="loader-count" id="count">0</div>
     <div class="loader-track"><div class="loader-bar" id="bar"></div></div>
   </div>
 
@@ -811,7 +843,7 @@
     <div class="wrap">
       <div class="reviews-head">
         <div class="rv">
-          <div class="label"><div class="bar"></div><span>Client Reviews</span></div>
+          <div class="label"><span>Client Reviews</span></div>
           <h2 class="h2">In Their Own Words</h2>
         </div>
         <p class="lead rv" style="max-width: 420px;">
@@ -861,9 +893,59 @@
             <div class="rverified"><span class="dot"></span>Verified</div>
           </div>
         </article>
+
+        <article class="rcard rv">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+          </div>
+          <blockquote>
+            "Jeremy and his team were terrific. Highly recommend."
+          </blockquote>
+          <div class="rfoot">
+            <div class="rmark">BB</div>
+            <div>
+              <div class="rname">Bill Boeddiker</div>
+              <div class="rmeta">Google Review — Local Guide</div>
+            </div>
+            <div class="rverified"><span class="dot"></span>Verified</div>
+          </div>
+        </article>
+
+        <article class="rcard rv">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+          </div>
+          <blockquote>
+            "Fast response. Quality work. I have had Standard HVAC do repairs on my rental properties and complete replacement of an old and difficult system, that performs well for a reasonable price. I recommend them."
+          </blockquote>
+          <div class="rfoot">
+            <div class="rmark">GK</div>
+            <div>
+              <div class="rname">Gene Kelly</div>
+              <div class="rmeta">Google Review — Repairs &amp; Full System Replacement</div>
+            </div>
+            <div class="rverified"><span class="dot"></span>Verified</div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Set the Standard <b>—</b> Napa Valley <b>—</b> Est. 2007 <b>—</b> </span>
+      <span>Set the Standard <b>—</b> Napa Valley <b>—</b> Est. 2007 <b>—</b> </span>
+    </div>
+  </div>
 
   <!-- ═══ ABOUT ═══ -->
   <section class="about" id="about">
@@ -893,7 +975,7 @@
           </div>
         </div>
         <div class="about-copy rv">
-          <div class="label"><div class="bar"></div><span>About Standard HVAC</span></div>
+          <div class="label"><span>About Standard HVAC</span></div>
           <h2 class="h2">Setting the Standard in Napa Valley HVAC</h2>
           <p>
             Since 2007, <strong>Standard HVAC</strong> has been Napa Valley's most trusted name for precision heating and cooling installation — <strong>heat pump installation in St. Helena</strong>, complete <strong>AC and furnace replacement in Napa</strong>, <strong>commercial HVAC for wineries and tasting rooms</strong>, and <strong>estate HVAC for custom homes</strong> from Calistoga to Carneros.
@@ -914,7 +996,7 @@
   <section id="services">
     <div class="wrap">
       <div class="svc-head rv">
-        <div class="label"><div class="bar"></div><span>What We Do</span></div>
+        <div class="label"><span>What We Do</span></div>
         <h2 class="h2">Built on Precision</h2>
       </div>
       <div class="svc-grid">
@@ -957,7 +1039,7 @@
     <div class="cta-bg"></div>
     <div class="cta-shade"></div>
     <div class="cta-inner rv">
-      <div class="label"><div class="bar"></div><span>Get in Touch</span></div>
+      <div class="label"><span>Get in Touch</span></div>
       <h2 class="h2">Ready to Set the Standard?</h2>
       <p class="lead">Serving Napa &amp; Sonoma County — response within 24 hours, 7 days a week.</p>
       <br>
@@ -988,26 +1070,16 @@
     (function () {
       const loader = document.getElementById('loader');
       const bar = document.getElementById('bar');
-      const count = document.getElementById('count');
-      let p = 0;
-
-      const tick = () => {
-        p += Math.random() * 16 + 6;
-        if (p >= 100) p = 100;
-        bar.style.width = p + '%';
-        count.textContent = Math.floor(p);
-        if (p < 100) {
-          setTimeout(tick, 140 + Math.random() * 160);
-        } else {
-          setTimeout(() => {
-            loader.classList.add('lift');
-            document.body.classList.remove('locked');
-            document.body.classList.add('ready');
-            setTimeout(() => loader.remove(), 1100);
-          }, 350);
-        }
-      };
-      setTimeout(tick, 400);
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width 1.3s cubic-bezier(0.77, 0, 0.175, 1)';
+        bar.style.width = '100%';
+      });
+      setTimeout(() => {
+        loader.classList.add('lift');
+        document.body.classList.remove('locked');
+        document.body.classList.add('ready');
+        setTimeout(() => loader.remove(), 1100);
+      }, 1750);
     })();
 
     /* ── NAV solid on scroll ── */
