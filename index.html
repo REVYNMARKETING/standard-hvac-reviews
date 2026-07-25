@@ -11,7 +11,6 @@
   <meta property="og:description" content="Verified client reviews for Standard HVAC — Napa Valley's leading heating, ventilation, and air conditioning installation company since 2007.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://standard-hvac-reviews.vercel.app">
-  <meta property="og:image" content="https://standard-hvac-reviews.vercel.app/img/hero.jpg">
 
   <script type="application/ld+json">
   {
@@ -246,17 +245,23 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('./img/hero.jpg') center 30% / cover no-repeat;
-      transform: scale(1.08);
-      animation: heroZoom 8s ease-out forwards;
+      background:
+        radial-gradient(ellipse 900px 600px at 85% 15%, rgba(200,16,46,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 500px at 8% 95%, rgba(200,16,46,0.06) 0%, transparent 60%),
+        #0c0c0c;
     }
-    @keyframes heroZoom { to { transform: scale(1); } }
-    .hero-shade {
+    .hero-bg::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.35) 100%);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 90px 90px;
+      mask-image: radial-gradient(ellipse at 72% 28%, black 0%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse at 72% 28%, black 0%, transparent 72%);
     }
+    .hero-shade { display: none; }
     .hero-content {
       position: relative;
       z-index: 2;
@@ -507,37 +512,47 @@
       gap: 5.5rem;
       align-items: center;
     }
-    .about-img {
+    .about-panel {
       position: relative;
-      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 3.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.4rem;
+      height: 100%;
     }
-    .about-img img {
-      width: 100%;
-      height: 560px;
-      object-fit: cover;
-      transition: transform 0.8s var(--ease);
-    }
-    .about-img:hover img { transform: scale(1.04); }
-    .about-img .badge {
+    .about-panel::before {
+      content: '';
       position: absolute;
-      left: 0; bottom: 0;
+      top: 0; left: 0;
+      width: 56px; height: 3px;
       background: var(--red);
-      padding: 1.6rem 2.2rem;
     }
-    .about-img .badge .n {
+    .apstat { display: flex; align-items: baseline; gap: 1.75rem; border-bottom: 1px solid var(--line); padding-bottom: 2.4rem; }
+    .apstat:last-child { border-bottom: none; padding-bottom: 0; }
+    .apstat .n {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.1rem;
+      font-size: 2.9rem;
       font-weight: 700;
       line-height: 1;
+      color: var(--red);
+      min-width: 120px;
     }
-    .about-img .badge .l {
+    .apstat .t { flex: 1; }
+    .apstat .l {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.62rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-top: 0.4rem;
-      color: rgba(255,255,255,0.85);
+    }
+    .apstat .s {
+      font-size: 0.78rem;
+      color: var(--dim);
+      line-height: 1.8;
+      margin-top: 0.35rem;
     }
     .about-copy .h2 { margin-bottom: 1.75rem; }
     .about-copy p {
@@ -623,13 +638,11 @@
     .cta-bg {
       position: absolute;
       inset: 0;
-      background: url('./img/cta.jpg') center / cover no-repeat fixed;
+      background:
+        radial-gradient(ellipse 900px 520px at 50% 110%, rgba(200,16,46,0.12) 0%, transparent 65%),
+        #0a0a0a;
     }
-    .cta-shade {
-      position: absolute;
-      inset: 0;
-      background: rgba(10,10,10,0.88);
-    }
+    .cta-shade { display: none; }
     .cta-inner {
       position: relative;
       z-index: 2;
@@ -717,10 +730,8 @@
       .wrap, .nav-inner, .hero-content, .foot, .cta-inner { padding-left: 2rem; padding-right: 2rem; }
       .reviews-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-img img { height: 420px; }
       .svc-grid { grid-template-columns: 1fr 1fr; }
       .nav-right > a:not(.nav-tel) { display: none; }
-      .cta-bg { background-attachment: scroll; }
     }
     @media (max-width: 620px) {
       .wrap, .nav-inner, .hero-content, .foot, .cta-inner { padding-left: 1.4rem; padding-right: 1.4rem; }
@@ -858,11 +869,27 @@
   <section class="about" id="about">
     <div class="wrap">
       <div class="about-grid">
-        <div class="about-img rv">
-          <img src="./img/about.jpg" alt="Standard HVAC commercial installation project in Napa Valley">
-          <div class="badge">
+        <div class="about-panel rv">
+          <div class="apstat">
             <div class="n">19</div>
-            <div class="l">Years in the Valley</div>
+            <div class="t">
+              <div class="l">Years in the Valley</div>
+              <div class="s">Serving Napa Valley since 2007 — custom homes, wineries, and commercial projects.</div>
+            </div>
+          </div>
+          <div class="apstat">
+            <div class="n">3K+</div>
+            <div class="t">
+              <div class="l">Successful Projects</div>
+              <div class="s">Custom homes, tasting rooms, hotels, restaurants, and industrial facilities.</div>
+            </div>
+          </div>
+          <div class="apstat">
+            <div class="n">5.0</div>
+            <div class="t">
+              <div class="l">Average Client Rating</div>
+              <div class="s">Verified reviews from real clients across Napa and Sonoma County.</div>
+            </div>
           </div>
         </div>
         <div class="about-copy rv">
@@ -877,11 +904,7 @@
           <p>
             Standard HVAC is part of the Standard family of companies — alongside <strong>Standard Service</strong> (maintenance and repair) and <strong>Standard Fab</strong> (custom sheet metal and welding) — covering every phase of HVAC for residential, estate, commercial, and industrial properties.
           </p>
-          <div class="about-stats">
-            <div class="astat"><div class="n">3K+</div><div class="l">Projects</div></div>
-            <div class="astat"><div class="n">2K+</div><div class="l">Clients</div></div>
-            <div class="astat"><div class="n">1.2M</div><div class="l">Problems Solved</div></div>
-          </div>
+
         </div>
       </div>
     </div>
